@@ -40,8 +40,4 @@ typedef struct {
 } sinfo_t;
 
 
-typedef struct {
-
-} broadcast_t;
-
 #endif //ECHOAPP_DEFINFO_H
