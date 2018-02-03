@@ -1,4 +1,5 @@
 #include "../headers/FrameInet.h"
+#include "../headers/DefInfo.h"
 
 int create_sock(sock_t *sock, int domain, int type)
 {
@@ -47,4 +48,19 @@ int socket_info(sock_t sock, sinfo_t *info)
     char *ip = inet_ntoa(_info.sin_addr);
     memcpy(info->ip, ip, strlen(ip) + 1);
     return EXIT_SUCCESS;
+}
+
+void init_addr(struct sockaddr_in *sockaddrIn, sa_family_t domain, char *ip, uint16_t port)
+{
+    sockaddrIn->sin_family = domain;
+    sockaddrIn->sin_port = htons(port);
+    sockaddrIn->sin_addr.s_addr = inet_addr(ip);
+    memset(sockaddrIn->sin_zero, 0, sizeof(sockaddrIn->sin_zero));
+}
+
+void get_addr(struct sockaddr_in sockaddrIn, sinfo_t *info)
+{
+    info->port = ntohs(sockaddrIn.sin_port);
+    char *buf = inet_ntoa(sockaddrIn.sin_addr);
+    memcpy(info->ip, buf, strlen(buf) + 1);
 }

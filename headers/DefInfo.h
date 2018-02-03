@@ -39,13 +39,6 @@ typedef struct {
     char ip[INET_ADDRSTRLEN];
 } sinfo_t;
 
-typedef struct {
-
-} server_udp;
-
-typedef struct {
-
-} client_udp;
 
 typedef struct {
 
