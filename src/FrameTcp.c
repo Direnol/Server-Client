@@ -1,6 +1,4 @@
 #include "../headers/FrameInet.h"
-#include "../headers/DefInfo.h"
-#include "../headers/FrameTcp.h"
 
 int tcp_init_server(server_tcp *server, int domain, const char *ip, const uint16_t *port)
 {
@@ -43,6 +41,9 @@ void close_client_tcp(client_tcp *client)
 {
     closeSock(client->sock);
     if (client->buf) free(client->buf);
+    client->buf = NULL;
+    client->status = OFF;
+    client->size = 0;
 }
 
 void close_server_tcp(server_tcp server)
@@ -96,4 +97,14 @@ void tcp_info_client(client_tcp *client, sinfo_t *info)
 {
     info->port = ntohs(client->sock.sockaddrIn.sin_port);
     char *ip = inet_ntoa(client->sock.sockaddrIn.sin_addr);
+}
+
+int tcp_first_free(client_tcp *arr, size_t n)
+{
+    for (int i = 0; i < n; ++i) {
+        if (arr[i].buf == NULL) {
+            return i;
+        }
+    }
+    return -1;
 }

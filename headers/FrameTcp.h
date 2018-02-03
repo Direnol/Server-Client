@@ -18,7 +18,6 @@ typedef struct {
 
 #define ctcp_fd(cl) ((cl)->sock.fd)
 
-
 int tcp_init_server(server_tcp *server, int domain, const char *ip, const uint16_t *port);
 
 int serv_listen(server_tcp server, client_tcp *new_fd, size_t size);
@@ -38,5 +37,7 @@ void close_client_tcp(client_tcp *client);
 void close_server_tcp(server_tcp server);
 
 void tcp_info_client(client_tcp *client, sinfo_t *info);
+
+int tcp_first_free(client_tcp *arr, size_t n);
 
 #endif //ECHOAPP_FRAMETCP_H

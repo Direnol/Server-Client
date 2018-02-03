@@ -17,6 +17,16 @@
 #define ON 1
 #define OFF 0
 
+#define MAX_CLIENTS (FD_SETSIZE - 2)
+#define MSG_SERV (" \"Server\"")
+#define LEN_MSG_SERV (sizeof(MSG_SERV))
+
+#define TIMEOUT (-5)
+#define RREAD (-6)
+#define RWRITE (-7)
+
+#define TYPE_READ 1
+#define TYPE_WRITE 0
 
 typedef struct {
     int fd;
@@ -26,9 +36,8 @@ typedef struct {
 
 typedef struct {
     uint16_t port;
-    char ip[3 * 4 + 3];
+    char ip[INET_ADDRSTRLEN];
 } sinfo_t;
-
 
 typedef struct {
 

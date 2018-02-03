@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "../headers/FrameInet.h"
 
 int main(int argc, char **argv)
@@ -27,13 +26,13 @@ int main(int argc, char **argv)
         if (strcmp(tcpMsg(&client), "off") == 0) {
             server.status = OFF;
         }
-        
+
         char msg[client.size + 15];
         strcpy(msg, tcpMsg(&client));
         printf("Log: %s\n", msg);
         strcat(msg, " \"Server\"\n");
         tcp_send(client.sock, msg, strlen(msg) + 1);
-        
+
     }
     close_client_tcp(&client);
     close_server_tcp(server);
