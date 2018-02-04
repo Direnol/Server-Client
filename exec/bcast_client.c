@@ -15,7 +15,7 @@ int main(int argc, char **argv)
         perror("Alloc");
         sock.status = OFF;
     }
-    if (sock.status == ON) {
+    if (sock.status == ON && ev != NULL) {
         ev[0].events = ev[1].events = EPOLLIN;
         ev[0].data.fd = STDIN_FILENO;
         ev[1].data.fd = sock.sock.sock.fd;
